@@ -1,0 +1,17 @@
+.wrapper {
+  width: 100vw;
+
+  background-color: black;
+}
+.title {
+  /* font-size: large; */
+  font-size: 12rem;
+  color: white;
+}
+.viewportDiv {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
