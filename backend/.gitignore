@@ -1,1 +1,5 @@
+#npm install으로 직접 설치
 /node_modules
+
+#설정파일 숨김
+/env
