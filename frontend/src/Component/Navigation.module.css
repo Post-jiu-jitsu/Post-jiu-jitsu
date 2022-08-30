@@ -1,0 +1,25 @@
+@import "../vars.css";
+.navWrapper {
+  background-color: var(--bjj-white);
+  position: absolute;
+  right: 2rem;
+  top: 7rem;
+  border-radius: 1rem;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+}
+.navWrapper > NavLink {
+  text-decoration: none;
+  color: red;
+}
+.navBtn {
+  background-color: var(--bjj-white);
+  position: absolute;
+  top: 3rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}

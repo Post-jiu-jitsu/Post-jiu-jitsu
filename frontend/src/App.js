@@ -4,6 +4,9 @@ import styles from "./App.module.css";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useStore } from "react-redux";
+import Technique from "./Routes/Technique";
+import User from "./Routes/User";
+import Navigation from "./Component/Navigation";
 
 function App() {
   const [mousePosition, setMousePosition] = useState({
@@ -52,8 +55,11 @@ function App() {
       />
       {/* Nav by router and scroll */}
       <Router>
+        <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/technique" element={<Technique />} />
+          <Route path="/user" element={<User />} />
         </Routes>
       </Router>
     </div>

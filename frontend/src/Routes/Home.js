@@ -1,9 +1,11 @@
 import styles from "./Home.module.css";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cursorDefault, cursorHomeTitle } from "../store";
 import { useDispatch } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
+import Navigation from "../Component/Navigation";
 
 // function useParallax(value, distance) {
 //   return useTransform(value, [0, 1], [-distance, distance]);
@@ -15,15 +17,42 @@ export default function Home() {
   const titleEnter = () => dispatch(cursorHomeTitle());
   const titleLeave = () => dispatch(cursorDefault());
 
-  // const { scrollYProgress } = useScroll();
-  // const ref = useRef(null);
-  // const scale = useTransform(scrollYProgress, [0, 1], [1, 3]);
-  // const { scrollYProgress } = useScroll({ target: ref });
-  // const y = useParallax(scrollYProgress, 300);
+  // ✉️  Please implement scroll animation using "scroll" event
+  // Do not using library. Practice useEffect hook or custom hook
+  const handleScrollAnimation = (e) => {
+    console.log(e);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => {
+      handleScrollAnimation(e);
+    });
+
+    return () => {
+      window.removeEventListener("scroll", (e) => {
+        handleScrollAnimation(e);
+      });
+    };
+  }, []);
+
   return (
     <div className={`${styles.wrapper}`}>
-      <motion.div className={`${styles.titleWrapper}`}>
-        {["POST", "BLACK", "BELT"].map((word) => (
+      <div className={`${styles.viewportDiv}`}>
+        <motion.div className={`${styles.scroller}`}>
+          <motion.span
+            className={styles.scrollerTitle}
+            onMouseEnter={titleEnter}
+            onMouseLeave={titleLeave}
+            // variants={spanVariant}
+            // animate={yPosAnim}
+          >
+            POST
+            <br />
+            BLACK
+            <br />
+            BELT
+          </motion.span>
+          {/* {["POST", "BLACK", "BELT"].map((word) => (
           <motion.div
             key={word}
             className={styles.title}
@@ -35,16 +64,11 @@ export default function Home() {
           >
             {word}
           </motion.div>
-        ))}
-      </motion.div>
+        ))} */}
+        </motion.div>
+      </div>
       <div className={`${styles.viewportDiv}`}>
-        <div
-          className={styles.title}
-          onMouseEnter={titleEnter}
-          onMouseLeave={titleLeave}
-        >
-          BJJ
-        </div>
+        <div className={styles.title}>BJJ</div>
       </div>
     </div>
   );
