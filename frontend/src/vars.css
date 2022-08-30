@@ -1,0 +1,9 @@
+/* 1. @import "vars.css"; */
+/* 2. use as variable ex) color: var(--white) */
+:root {
+  --bjj-white: #ffff;
+  --bjj-blue: #004a9d;
+  --bjj-purple: #74529e;
+  --bjj-brown: #804b44;
+  --bjj-black: #000000;
+}

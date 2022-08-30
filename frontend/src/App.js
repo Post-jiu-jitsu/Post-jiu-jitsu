@@ -3,14 +3,16 @@ import Home from "./Routes/Home";
 import styles from "./App.module.css";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useStore } from "react-redux";
 
 function App() {
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
   });
-  const [cursorAnimate, setcursorAnimate] = useState("default");
-  console.log(mousePosition);
+  const cursor = useStore().getState();
+
+  // check coordinate of mouse movement
   useEffect(() => {
     const mouseMove = (e) => {
       setMousePosition({
@@ -23,43 +25,37 @@ function App() {
       window.removeEventListener("mousemove", mouseMove);
     };
   }, []);
+
+  // (store.js) match with return value of reducers in cursorSlice
   const cursorVariants = {
     default: {
       x: mousePosition.x - 16,
       y: mousePosition.y - 16,
     },
-    text: {
+    homeTitle: {
       height: 150,
       width: 150,
       x: mousePosition.x - 75,
       y: mousePosition.y - 75,
-      backgroundColor: "yellow",
+      backgroundColor: "#004a9d",
       mixBlendMode: "difference",
     },
   };
 
-  const textEnter = () => setcursorAnimate("text");
-  const textLeave = () => setcursorAnimate("default");
   return (
-    <div className={styles.viewportDiv}>
-      {/* <CustomCursor /> */}
+    <div>
+      {/* change cursor animation by animate prop(cursorStore.js) */}
       <motion.div
         className={styles.cursor}
         variants={cursorVariants}
-        animate={cursorAnimate}
+        animate={cursor}
       />
-      <h1
-        className={styles.title}
-        onMouseEnter={textEnter}
-        onMouseLeave={textLeave}
-      >
-        Hello world
-      </h1>
-      {/* <Router>
+      {/* Nav by router and scroll */}
+      <Router>
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
-      </Router> */}
+      </Router>
     </div>
   );
 }
