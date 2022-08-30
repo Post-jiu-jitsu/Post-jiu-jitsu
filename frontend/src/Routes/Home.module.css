@@ -40,9 +40,19 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding-left: 10rem;
+  padding-right: 10rem;
+  /* justify-content: space-between; */
 }
-.title {
-  font-size: 20rem;
+.techWrapper {
+  line-height: 10rem;
+}
+.tech {
+  font-size: 5rem;
   color: var(--bjj-white);
+}
+.techIllust {
+  width: 500px;
+  height: 500px;
+  margin-left: 6rem;
 }

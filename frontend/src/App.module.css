@@ -1,6 +1,7 @@
 @import "./vars.css";
 
 * {
+  /* width: 100vw; */
   cursor: none;
   -ms-overflow-style: none;
   text-decoration: none;

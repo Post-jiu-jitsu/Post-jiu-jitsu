@@ -43,6 +43,14 @@ function App() {
       backgroundColor: "#004a9d",
       mixBlendMode: "difference",
     },
+    homeTech: {
+      height: 70,
+      width: 70,
+      x: mousePosition.x - 35,
+      y: mousePosition.y - 35,
+      backgroundColor: "orange",
+      mixBlendMode: "difference",
+    },
   };
 
   return (

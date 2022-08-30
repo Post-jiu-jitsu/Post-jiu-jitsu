@@ -1,15 +1,10 @@
 import styles from "./Home.module.css";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 
-import { useEffect, useRef, useState } from "react";
-import { cursorDefault, cursorHomeTitle } from "../store";
+import { useEffect, useState } from "react";
+import { cursorDefault, cursorHomeTech, cursorHomeTitle } from "../store";
 import { useDispatch } from "react-redux";
-import { Link, NavLink } from "react-router-dom";
-import Navigation from "../Component/Navigation";
 
-// function useParallax(value, distance) {
-//   return useTransform(value, [0, 1], [-distance, distance]);
-// }
 export default function Home() {
   // To modify redux store by sending action to reducer
   const dispatch = useDispatch();
@@ -20,9 +15,8 @@ export default function Home() {
   // ✉️  Please implement scroll animation using "scroll" event
   // Do not using library. Practice useEffect hook or custom hook
   const handleScrollAnimation = (e) => {
-    console.log(e);
+    // console.log(e);
   };
-
   useEffect(() => {
     window.addEventListener("scroll", (e) => {
       handleScrollAnimation(e);
@@ -35,6 +29,31 @@ export default function Home() {
     };
   }, []);
 
+  // Cursor and illustration animation
+  const techEnter = (e) => {
+    setIllust(e.target.innerText.split(" ").join("")); //get animate value of variant from inddnerText of each div
+    dispatch(cursorHomeTech());
+  };
+  const techLeave = () => {
+    setIllust("default");
+    dispatch(cursorDefault());
+  };
+  const [illust, setIllust] = useState("default");
+  const illustVariant = {
+    // Modify color -> image scr
+    default: {
+      backgroundColor: "white",
+    },
+    TopPosition: {
+      backgroundColor: "red",
+    },
+    GuardPosition: {
+      backgroundColor: "blue",
+    },
+    Drills: {
+      backgroundColor: "green",
+    },
+  };
   return (
     <div className={`${styles.wrapper}`}>
       <div className={`${styles.viewportDiv}`}>
@@ -46,7 +65,7 @@ export default function Home() {
             // variants={spanVariant}
             // animate={yPosAnim}
           >
-            POST
+            TITLE
             <br />
             BLACK
             <br />
@@ -68,7 +87,24 @@ export default function Home() {
         </motion.div>
       </div>
       <div className={`${styles.viewportDiv}`}>
-        <div className={styles.title}>BJJ</div>
+        <ul className={styles.techWrapper}>
+          {["Top Position", "Guard Position", "Drills"].map((tech, index) => (
+            <motion.div
+              key={index}
+              className={styles.tech}
+              onMouseEnter={techEnter}
+              onMouseLeave={techLeave}
+              // onMouseEnter={techEnter(index)}
+            >
+              {tech}
+            </motion.div>
+          ))}
+        </ul>
+        <motion.div
+          className={styles.techIllust}
+          variants={illustVariant}
+          animate={illust}
+        />
       </div>
     </div>
   );

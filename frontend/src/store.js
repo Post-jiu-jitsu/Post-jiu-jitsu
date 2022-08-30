@@ -12,9 +12,11 @@ const cursorSlice = createSlice({
   reducers: {
     cursorDefault: (state) => "default",
     cursorHomeTitle: (state, action) => "homeTitle",
+    cursorHomeTech: (state, action) => "homeTech",
   },
 });
 
 const cursorStore = configureStore({ reducer: cursorSlice.reducer });
-export const { cursorDefault, cursorHomeTitle } = cursorSlice.actions;
+export const { cursorDefault, cursorHomeTitle, cursorHomeTech } =
+  cursorSlice.actions;
 export default cursorStore;
