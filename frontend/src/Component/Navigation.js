@@ -25,9 +25,14 @@ export default function Navigation() {
         variants={navVariant}
         animate={navState}
       >
-        <Link to="/">Home</Link>
-        <Link to="/technique">Technique</Link>
-        <Link to="/user">user</Link>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          Home
+        </Link>
+        <Link to="/top">Top position</Link>
+        <Link to="/guard">Guard position</Link>
+        <Link to="/drills">Drills</Link>
+        <Link to="/user">My page</Link>
+        <Link to="/login">Logout</Link>
       </motion.nav>
     </>
   );

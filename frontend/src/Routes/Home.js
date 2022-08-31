@@ -13,7 +13,7 @@ export default function Home() {
   const titleLeave = () => dispatch(cursorDefault());
 
   // ✉️  Please implement scroll animation using "scroll" event
-  // Do not using library. Practice useEffect hook or custom hook
+  // Do not use library. Practice useEffect hook or custom hook
   const handleScrollAnimation = (e) => {
     // console.log(e);
   };
@@ -42,16 +42,16 @@ export default function Home() {
   const illustVariant = {
     // Modify color -> image scr
     default: {
-      backgroundColor: "white",
+      // backgroundColor: "darkslateblue",
     },
     TopPosition: {
-      backgroundColor: "red",
+      backgroundColor: "pink",
     },
     GuardPosition: {
-      backgroundColor: "blue",
+      backgroundColor: "khaki",
     },
     Drills: {
-      backgroundColor: "green",
+      backgroundColor: "teal",
     },
   };
   return (
@@ -65,11 +65,13 @@ export default function Home() {
             // variants={spanVariant}
             // animate={yPosAnim}
           >
-            TITLE
+            POST
             <br />
             BLACK
             <br />
             BELT
+            <br />
+            JIU-JITSU
           </motion.span>
           {/* {["POST", "BLACK", "BELT"].map((word) => (
           <motion.div

@@ -1,7 +1,11 @@
 @import "../vars.css";
+a:-webkit-any-link {
+  text-decoration: none;
+  color: inherit;
+}
 .navWrapper {
   background-color: var(--bjj-white);
-  position: absolute;
+  position: fixed;
   right: 2rem;
   top: 7rem;
   border-radius: 1rem;
@@ -9,14 +13,16 @@
   display: flex;
   flex-direction: column;
   font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.6);
+  gap: 1rem;
 }
-.navWrapper > NavLink {
-  text-decoration: none;
-  color: red;
+a:hover {
+  color: black;
 }
+
 .navBtn {
   background-color: var(--bjj-white);
-  position: absolute;
+  position: fixed;
   top: 3rem;
   right: 2rem;
   width: 3rem;

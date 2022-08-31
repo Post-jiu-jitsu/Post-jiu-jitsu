@@ -7,6 +7,7 @@ import { useStore } from "react-redux";
 import Technique from "./Routes/Technique";
 import User from "./Routes/User";
 import Navigation from "./Component/Navigation";
+import Login from "./Routes/login";
 
 function App() {
   const [mousePosition, setMousePosition] = useState({
@@ -40,21 +41,21 @@ function App() {
       width: 150,
       x: mousePosition.x - 75,
       y: mousePosition.y - 75,
-      backgroundColor: "#004a9d",
-      mixBlendMode: "difference",
+      backgroundColor: "#b1e1ff",
+      mixBlendMode: "hard-light",
     },
     homeTech: {
       height: 70,
       width: 70,
       x: mousePosition.x - 35,
       y: mousePosition.y - 35,
-      backgroundColor: "orange",
+      backgroundColor: "#b1e1ff",
       mixBlendMode: "difference",
     },
   };
 
   return (
-    <div>
+    <>
       {/* change cursor animation by animate prop(cursorStore.js) */}
       <motion.div
         className={styles.cursor}
@@ -66,11 +67,12 @@ function App() {
         <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/technique" element={<Technique />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/user" element={<User />} />
+          <Route path="/:techTitle" element={<Technique />} />
         </Routes>
       </Router>
-    </div>
+    </>
   );
 }
 

@@ -13,7 +13,7 @@
 
 .cursor {
   /* background-color: var(--bjj-white); */
-  background-color: var(--bjj-purple);
+  background-color: var(--purple);
   height: 32px;
   width: 32px;
   border-radius: 50%;
