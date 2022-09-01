@@ -6,15 +6,15 @@
 }
 .scroller {
   width: 100vw;
-  height: 18rem;
-  line-height: 18rem;
+  height: 15rem;
+  line-height: 15rem;
   /* margin-left: 10rem; */
   position: relative;
   overflow: hidden;
 }
 .scrollerTitle {
   animation: slide 7s infinite;
-  font-size: 18rem;
+  font-size: 15rem;
   color: var(--bjj-white);
   position: absolute;
   top: 0;
@@ -26,13 +26,13 @@
     top: 0;
   }
   25% {
-    top: -18rem;
+    top: 15rem;
   }
   50% {
-    top: -36rem;
+    top: -30rem;
   }
   75% {
-    top: -54rem;
+    top: -45rem;
   }
 }
 .viewportDiv {

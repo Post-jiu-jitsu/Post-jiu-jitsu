@@ -4,10 +4,13 @@ import styles from "./App.module.css";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useStore } from "react-redux";
-import Technique from "./Routes/Technique";
+import Tech from "./Routes/Tech";
 import User from "./Routes/User";
 import Navigation from "./Component/Navigation";
 import Login from "./Routes/login";
+import TechPost from "./Routes/TechPost";
+import NoMatch from "./Routes/NoMatch";
+import UserDiary from "./Routes/UserDiary";
 
 function App() {
   const [mousePosition, setMousePosition] = useState({
@@ -66,10 +69,17 @@ function App() {
       <Router>
         <Navigation />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/user" element={<User />} />
-          <Route path="/:techTitle" element={<Technique />} />
+          {/* Nested routes with react-router 6 */}
+          <Route path="/user" element={<User />}>
+            <Route path="/user/:diaryId" element={<UserDiary />} />
+          </Route>
+          <Route path="/:techTitle" element={<Tech />}>
+            <Route path="/:techTitle/:postTitle" element={<TechPost />} />
+          </Route>
+          {/* Others */}
+          <Route path="*" element={<NoMatch />} />
         </Routes>
       </Router>
     </>
