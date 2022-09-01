@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { cursorDefault, cursorHomeTech, cursorHomeTitle } from "../store";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   // To modify redux store by sending action to reducer
@@ -54,6 +55,21 @@ export default function Home() {
       backgroundColor: "teal",
     },
   };
+  // fake db: replace this
+  const techs = [
+    {
+      title: "Top Position",
+      link: "/top",
+    },
+    {
+      title: "Guard Position",
+      link: "/gaurd",
+    },
+    {
+      title: "Drills",
+      link: "/drills",
+    },
+  ];
   return (
     <div className={`${styles.wrapper}`}>
       <div className={`${styles.viewportDiv}`}>
@@ -90,16 +106,18 @@ export default function Home() {
       </div>
       <div className={`${styles.viewportDiv}`}>
         <ul className={styles.techWrapper}>
-          {["Top Position", "Guard Position", "Drills"].map((tech, index) => (
-            <motion.div
-              key={index}
-              className={styles.tech}
-              onMouseEnter={techEnter}
-              onMouseLeave={techLeave}
-              // onMouseEnter={techEnter(index)}
-            >
-              {tech}
-            </motion.div>
+          {/*  */}
+          {techs.map((tech, index) => (
+            <Link to={tech.link} key={index}>
+              <motion.div
+                className={styles.tech}
+                onMouseEnter={techEnter}
+                onMouseLeave={techLeave}
+                // onMouseEnter={techEnter(index)}
+              >
+                {tech.title}
+              </motion.div>
+            </Link>
           ))}
         </ul>
         <motion.div

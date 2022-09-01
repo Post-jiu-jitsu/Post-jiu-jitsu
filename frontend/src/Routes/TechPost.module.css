@@ -1,0 +1,36 @@
+@import "../vars.css";
+
+.Wrapper {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem;
+  background-color: var(--white);
+  color: var(--black);
+  gap: 5rem;
+}
+
+.illusts {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.illustWrapper {
+  display: flex;
+  align-items: center;
+}
+.illust {
+  width: 400px;
+  height: 500px;
+  background-color: khaki;
+  border-radius: 3rem;
+}
+
+.illustInfo {
+  display: flex;
+  width: 800px;
+  justify-content: center;
+  align-items: center;
+  font-size: large;
+}

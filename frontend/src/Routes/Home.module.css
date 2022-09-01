@@ -2,7 +2,7 @@
 
 .wrapper {
   width: 100vw;
-  background-color: var(--bjj-black);
+  background-color: var(--black);
 }
 .scroller {
   width: 100vw;
@@ -13,9 +13,9 @@
   overflow: hidden;
 }
 .scrollerTitle {
-  animation: slide 7s infinite;
+  animation: slide 5s infinite;
   font-size: 15rem;
-  color: var(--bjj-white);
+  color: var(--white);
   position: absolute;
   top: 0;
   height: 20em;
@@ -26,7 +26,7 @@
     top: 0;
   }
   25% {
-    top: 15rem;
+    top: -15rem;
   }
   50% {
     top: -30rem;
@@ -49,7 +49,7 @@
 }
 .tech {
   font-size: 5rem;
-  color: var(--bjj-white);
+  color: var(--white);
 }
 .techIllust {
   width: 500px;
