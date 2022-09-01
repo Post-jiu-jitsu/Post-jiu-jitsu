@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import styles from "./TechPost.module.css";
-import YouTube, { YouTubeProps } from "react-youtube";
+import Video from "../Component/Video";
 
 export default function TechPost() {
   const { techTitle, postTitle } = useParams();
@@ -20,31 +20,7 @@ export default function TechPost() {
           </div>
         ))}
       </div>
-      <div>
-        <h2>Related video lectures</h2>
-        {/* Install react-youtube to use this component */}
-        {/* https://www.youtube.com/watch?v=w31i45Cfwvs*/}
-        <div>
-          <button> prev </button>
-          <YouTube
-            videoId="w31i45Cfwvs"
-            opts={{
-              width: "560",
-              height: "315",
-              playerVars: {
-                autoplay: 0, // 1: autoplay on
-                rel: 0, //관련 동영상 표시하지 않음 (근데 별로 쓸모 없는듯..)
-                modestbranding: 1, // 컨트롤 바에 youtube 로고를 표시하지 않음
-              },
-            }}
-            //이벤트 리스너
-            onEnd={(e) => {
-              e.target.stopVideo(0);
-            }}
-          />
-          <button> next </button>
-        </div>
-      </div>
+      <Video />
     </div>
   );
 }
