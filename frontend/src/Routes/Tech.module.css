@@ -1,8 +1,5 @@
 @import "../vars.css";
 
-.link:hover {
-  color: var(--skyBlue);
-}
 .techWrapper {
   padding: 3rem;
   display: flex;
@@ -19,15 +16,4 @@
   padding-left: 3rem;
   display: flex;
   flex-direction: column;
-}
-
-.category {
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-}
-
-.posts {
-  display: flex;
-  gap: 2rem;
 }

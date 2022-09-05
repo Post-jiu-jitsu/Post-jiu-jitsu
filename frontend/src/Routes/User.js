@@ -16,6 +16,7 @@ export default function User() {
         <h1>Welcome user!</h1>
         <div className={styles.belt}>
           <div className={styles.beltRank}>
+            {/* ✉️ Add css vintage details to lower level graus */}
             <div className={styles.beltGrau}></div>
             <div className={styles.beltGrau}></div>
           </div>

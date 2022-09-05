@@ -1,0 +1,18 @@
+@import "../vars.css";
+.link:hover {
+  color: var(--skyBlue);
+}
+
+.category {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+.category > h2 {
+  width: 15%;
+}
+
+.posts {
+  display: flex;
+  gap: 2rem;
+}

@@ -43,7 +43,7 @@ export default function Home() {
   const illustVariant = {
     // Modify color -> image scr
     default: {
-      // backgroundColor: "darkslateblue",
+      // backgroundColor: "white",
     },
     TopPosition: {
       backgroundColor: "pink",
@@ -115,6 +115,7 @@ export default function Home() {
                 onMouseLeave={techLeave}
                 // onMouseEnter={techEnter(index)}
               >
+                {/* ✉️ Change English to Korean while hover on the title */}
                 {tech.title}
               </motion.div>
             </Link>

@@ -9,7 +9,7 @@ export default function TechPost() {
       <h1>{postTitle}</h1>
       <div className={styles.illusts}>
         {[1, 2, 3, 4].map((illust) => (
-          <div className={styles.illustWrapper}>
+          <div key={illust} className={styles.illustWrapper}>
             {illust % 2 !== 0 ? (
               <div className={styles.illustInfo}>동작 설명</div>
             ) : null}

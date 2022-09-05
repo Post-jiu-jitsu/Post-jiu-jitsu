@@ -36,8 +36,8 @@ function App() {
   // (store.js) match with return value of reducers in cursorSlice
   const cursorVariants = {
     default: {
-      x: mousePosition.x - 16,
-      y: mousePosition.y - 16,
+      x: mousePosition.x - 10,
+      y: mousePosition.y - 10,
     },
     homeTitle: {
       height: 150,

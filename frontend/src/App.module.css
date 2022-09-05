@@ -168,8 +168,8 @@ a:-webkit-any-link {
 .cursor {
   /* background-color: var(--white); */
   background-color: var(--purple);
-  height: 32px;
-  width: 32px;
+  height: 20px;
+  width: 20px;
   border-radius: 50%;
   position: fixed;
   top: 0;
