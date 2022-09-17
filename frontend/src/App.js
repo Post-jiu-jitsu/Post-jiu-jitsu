@@ -13,10 +13,12 @@ import NoMatch from "./Routes/NoMatch";
 import UserDiary from "./Routes/UserDiary";
 
 function App() {
+  // Store coordinate of mouse movement
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0,
   });
+  // cursor state managed by redux
   const cursor = useStore().getState();
 
   // check coordinate of mouse movement
