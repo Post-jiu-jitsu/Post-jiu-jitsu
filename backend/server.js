@@ -13,8 +13,8 @@ app.use(session(sessionObj));
 app.use(passport.initialize());
 app.use(passport.session());
 
-const login = require('./routes/login');
-app.use('/login', login);
+const users = require('./routes/login');
+app.use('/users', users);
 
 app.listen(PORT, () => {
   console.log('My REST API running on port ' + PORT + '!');
