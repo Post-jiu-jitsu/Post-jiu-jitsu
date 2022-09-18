@@ -1,51 +1,22 @@
-//모듈설치
-//npm install --save express
-//npm run start
-//npm install cors --save
-//npm install --save mysql
-
-//터미널로 run
-//node server.js
-
-const express = require('express');
-const app = express();
-const cors = require('cors');
-const index = require('./routes/index');
-const db = require('./env/db');
-const { createConnection } = require('net');
+var express = require('express')
+var passport = require('passport')
+var session = require('express-session')
+var app = express();
 
 const PORT = 3000;
+//세션 설정값 객체
+var sessionObj = require('./config/session')
+//.env파일 전역적으로 사용가능
+require('dotenv').config({path: "./env/.env"});
 
-//cors 방지
-app.use(cors());
+app.use(session(sessionObj)); 
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use('/index', index);
-
-//restful 하게 구현
-app.delete('/', (req, res) => res.send('delete'));
-app.post('/', (req, res) => res.send('post'));
-app.get('/', (req, res) => res.send('get'));
-app.put('/', (req, res) => res.send('put'));
-
-//DB사용법 숙지
-const dbopen = (req, res) =>{
-    db.connect();
-    console.log("dbopen");
-    db.query('SELECT * FROM users', function(error, results, fields){
-        if(error){
-            console.log(error);
-        }
-        console.log(results);
-    })
-    db.end;
-    console.log("dbclose");
-}
-
-app.get('/dbopen', dbopen);
-
-
-
+const login = require('./routes/login');
+app.use('/login', login);
 
 app.listen(PORT, () => {
-    console.log('My REST API running on port ' + PORT + '!');
+  console.log('My REST API running on port ' + PORT + '!');
 })
+

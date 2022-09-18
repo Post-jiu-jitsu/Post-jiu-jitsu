@@ -3,3 +3,7 @@
 
 #설정파일 숨김
 /env
+/config
+
+#사용 안하는 파일 숨김
+/not_using_file
