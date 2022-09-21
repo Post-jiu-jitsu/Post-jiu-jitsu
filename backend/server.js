@@ -11,7 +11,7 @@ var session = require('express-session')
 const users = require('./routes/login');
 const diary = require('./routes/diary/diary');
 const diarysimple = require('./routes/diary/diarysimple');
-const diarysimple = require('./routes/diary/diarytechtag');
+const diarytechtag = require('./routes/diary/diarytechtag');
 
 var sessionObj = require('./config/session')
 
