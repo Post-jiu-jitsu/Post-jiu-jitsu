@@ -7,7 +7,12 @@ router.get("/", function (req, res) {
   console.log("/");
   console.log("현재 세션값");
   console.log(req.session);
-  res.send("login");
+  
+  res.json({
+    "req.session": req.session, // 세션 데이터
+    "req.user": req.user, // 유저 데이터(뒷 부분에서 설명)
+    "req._passport": req._passport, // 패스포트 데이터(뒷 부분에서 설명)
+  })
 });
 
 // Setting the naver oauth routes
@@ -22,6 +27,8 @@ router.get(
     failureRedirect: "/users/loginfail",
   }),
   function (req, res) {
+    console.log("콜백함수 실행");
+    console.log(req.session);
     res.redirect("/users");
   }
 );
