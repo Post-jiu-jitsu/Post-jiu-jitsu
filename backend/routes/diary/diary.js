@@ -3,8 +3,7 @@ const router = express.Router();
 const bodyParser = require("body-parser");
 
 const db = require("../../database/dbconfig");
-const send = require("send");
-const { query } = require("express");
+const sync_db = require("../../database/sync_dbconfig");
 
 let user_id_by_session = "choyoungwoo9@naver.com";
 
@@ -14,10 +13,178 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 //전체 다이어리 내용 받아오기
-const GetDiaryAll = (req, res) => {};
+const GetDiaryAll = (req, res) => {
+  GetDiaryAllSQL =
+    "select * from diary where user_id = '" + user_id_by_session + "'";
+  db.query(GetDiaryAllSQL, function (error, results, fields) {
+    if (error) {
+      res.send(error);
+    } else {
+      console.log(results);
+      //response객체 배열 생성
+      let response = new Array(results.length);
+      for (let i = 0; i < results.length; i++) {
+        //diary_cal_cat 파싱하여 약속된 데이터로 변환
+        let diary_cal_cat_array = new Array(results[i].diary_cal_cat.length);
+        for (let j = 0; j < results[i].diary_cal_cat.length; j++) {
+          let cat = "";
+          if (results[i].diary_cal_cat.charAt(j) == "a") {
+            cat = "기술 연습";
+          } else if (results[i].diary_cal_cat.charAt(j) == "b") {
+            cat = "스파링 데이";
+          } else if (results[i].diary_cal_cat.charAt(j) == "c") {
+            cat = "승급";
+          } else if (results[i].diary_cal_cat.charAt(j) == "d") {
+            cat = "오픈매트";
+          } else if (results[i].diary_cal_cat.charAt(j) == "e") {
+            cat = "대회";
+          }
+          diary_cal_cat_array[j] = cat;
+        }
+        console.log(diary_cal_cat_array);
+        response[i] = {
+          diary: {
+            diary_day: results[0].diary_day,
+            diary_title: results[0].diary_title,
+            diary_time: results[0].diary_time,
+            diary_content: results[0].diary_content,
+            diary_cal_cat: [],
+            techtag: [],
+          },
+        };
+        //cal_cat 배열 추가
+        for (let j = 0; j < diary_cal_cat_array.length; j++) {
+          response[i].diary.diary_cal_cat.push({
+            name: diary_cal_cat_array[j],
+          });
+        }
+        GetTechTagByDiaryIdSQL =
+          "select * from techtag where diary_id = '" +
+          results[i].diary_id +
+          "'";
+
+        // async로 논리적 한계점 찾아 sync로 변경해 코딩했음 추후에 error예외처리 필요(논리적으로 error없어보임)
+        techtag_array = sync_db.query(GetTechTagByDiaryIdSQL);
+        console.log(techtag_array);
+        for (let j = 0; j < techtag_array.length; j++) {
+          response[i].diary.techtag.push({
+            category1: techtag_array[j].techtag_cat1,
+            category2: techtag_array[j].techtag_cat2,
+            category3: techtag_array[j].techtag_cat3,
+            tech_title: techtag_array[j].techtag_name
+          })}
+
+        // async로 논리적 한계점 찾아 sync로 변경해 코딩했음
+        // db.query(GetTechTagByDiaryIdSQL, function (error, results2, fields) {
+        //   if (error) {
+        //     res.send(error);
+        //   } else {
+        //     techtag_array = new Array(results2.length);
+        //     //techtag 프로퍼티 추가
+            // for (let j = 0; j < results2.length; j++) {
+            //   response[i].diary.techtag.push({
+            //     category1: results2[j].techtag_cat1,
+            //     category2: results2[j].techtag_cat2,
+            //     category3: results2[j].techtag_cat3,
+            //     tech_title: results2[j].techtag_name,
+            //   });
+        //     }
+        //   }
+        // });
+      }
+      res.send(response);
+    }
+  });
+};
 
 //원하는 달의 다이어리 내용 받아오기
-const GetDiaryByMonth = (req, res) => {};
+const GetDiaryByMonth = (req, res) => {
+  console.log(req.query.year);
+  const diary_start_day =
+    req.query.year + "-" + req.query.month + "-01";
+  const diary_end_day =
+    req.query.year + "-" + (parseInt(req.query.month)+1) + "-01";
+  
+    //원하는 달의 diary 가져오기
+  GetDiaryByMonthSQL =
+    "select * from diary where user_id = '" + user_id_by_session + "'"+" and diary_day >= '" + diary_start_day + "' and diary_day < '" + diary_end_day + "'"
+  db.query(GetDiaryByMonthSQL, function (error, results, fields) {
+    if (error) {
+      res.send(error);
+    } else {
+      //response객체 배열 생성
+      let response = new Array(results.length);
+      for (let i = 0; i < results.length; i++) {
+        //diary_cal_cat 파싱하여 약속된 데이터로 변환
+        let diary_cal_cat_array = new Array(results[i].diary_cal_cat.length);
+        for (let j = 0; j < results[i].diary_cal_cat.length; j++) {
+          let cat = "";
+          if (results[i].diary_cal_cat.charAt(j) == "a") {
+            cat = "기술 연습";
+          } else if (results[i].diary_cal_cat.charAt(j) == "b") {
+            cat = "스파링 데이";
+          } else if (results[i].diary_cal_cat.charAt(j) == "c") {
+            cat = "승급";
+          } else if (results[i].diary_cal_cat.charAt(j) == "d") {
+            cat = "오픈매트";
+          } else if (results[i].diary_cal_cat.charAt(j) == "e") {
+            cat = "대회";
+          }
+          diary_cal_cat_array[j] = cat;
+        }
+        response[i] = {
+          diary: {
+            diary_day: results[0].diary_day,
+            diary_title: results[0].diary_title,
+            diary_time: results[0].diary_time,
+            diary_content: results[0].diary_content,
+            diary_cal_cat: [],
+            techtag: [],
+          },
+        };
+        //cal_cat 배열 추가
+        for (let j = 0; j < diary_cal_cat_array.length; j++) {
+          response[i].diary.diary_cal_cat.push({
+            name: diary_cal_cat_array[j],
+          });
+        }
+        GetTechTagByDiaryIdSQL =
+          "select * from techtag where diary_id = '" +
+          results[i].diary_id +
+          "'";
+
+        // async로 논리적 한계점 찾아 sync로 변경해 코딩했음 추후에 error예외처리 필요(논리적으로 error없어보임)
+        techtag_array = sync_db.query(GetTechTagByDiaryIdSQL);
+        for (let j = 0; j < techtag_array.length; j++) {
+          response[i].diary.techtag.push({
+            category1: techtag_array[j].techtag_cat1,
+            category2: techtag_array[j].techtag_cat2,
+            category3: techtag_array[j].techtag_cat3,
+            tech_title: techtag_array[j].techtag_name
+          })}
+
+        // async로 논리적 한계점 찾아 sync로 변경해 코딩했음
+        // db.query(GetTechTagByDiaryIdSQL, function (error, results2, fields) {
+        //   if (error) {
+        //     res.send(error);
+        //   } else {
+        //     techtag_array = new Array(results2.length);
+        //     //techtag 프로퍼티 추가
+            // for (let j = 0; j < results2.length; j++) {
+            //   response[i].diary.techtag.push({
+            //     category1: results2[j].techtag_cat1,
+            //     category2: results2[j].techtag_cat2,
+            //     category3: results2[j].techtag_cat3,
+            //     tech_title: results2[j].techtag_name,
+            //   });
+        //     }
+        //   }
+        // });
+      }
+      res.send(response);
+    }
+  });
+};
 
 //원하는 날짜의 다이어리 내용 받아오기
 const GetDiaryByDay = (req, res) => {
@@ -81,7 +248,7 @@ const GetDiaryByDay = (req, res) => {
               category1: results2[i].techtag_cat1,
               category2: results2[i].techtag_cat2,
               category3: results2[i].techtag_cat3,
-              tech_title: results2[i].techtag_name
+              tech_title: results2[i].techtag_name,
             });
           }
           res.send(response);
@@ -92,7 +259,9 @@ const GetDiaryByDay = (req, res) => {
 };
 
 //원하는 기술태그의 다이어리 내용 받아오기
-const GetDiaryBytechtag = (req, res) => {};
+const GetDiaryBytechtag = (req, res) => {
+  
+};
 
 //다이어리 게시하기
 const PostDiary = (req, res) => {
