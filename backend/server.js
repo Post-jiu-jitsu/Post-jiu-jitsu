@@ -11,7 +11,7 @@ var session = require('express-session')
 const users = require('./routes/login');
 const diary = require('./routes/diary/diary');
 const diarysimple = require('./routes/diary/diarysimple');
-const diarytechtag = require('./routes/diary/diarytechtag');
+const techtag = require('./routes/techtag/techtag');
 
 var sessionObj = require('./config/session')
 
@@ -28,7 +28,7 @@ app.use('/users', users);
 //diary 관련 라우팅
 app.use('/diary', diary);
 app.use('/diarysimple', diarysimple);
-app.use('/diarytechtag', diarytechtag);
+app.use('/techtag', techtag);
 
 app.listen(PORT, () => {
   console.log('My REST API running on port ' + PORT + '!');
