@@ -272,32 +272,20 @@ const GetDiaryBytechtag = (req, res) => {
   let GetDiaryIDBytechtagSQL =
     "select diary_id from techtag where techtag_name = '" +
     req.query.name +
+    "' and user_id = '" +
+    user_id_by_session +
     "'";
   db.query(GetDiaryIDBytechtagSQL, function (error, results, fields) {
     if (error) {
       res.send(error);
     } else {
-      //세션의 유저가 쓴글의 ID모두 가져옴
-      let GetDiaryIDByUserID =
-      "select diary_id from diary where user_id = '"+ user_id_by_session +"'";
-      //세션값으로 결정되므로 논리적으로 오류없으나 예외처리 필요
-      b = sync_db.query(GetDiaryIDByUserID);
-      let Diary_id_array = [];
+      //응답객체
+      let response = new Array(results.length);
       for (let i = 0; i < results.length; i++) {
-        for (let j = 0; j < b.length; j++) {
-          if (results[i].diary_id == b[j].diary_id) {
-            Diary_id_array.push({ diary_id: results[i].diary_id });
-          }
-        }
-      }
-
-      let response = new Array(Diary_id_array.length);
-      //Diary_id를 바탕으로 query 생성
-      for (let i = 0; i < Diary_id_array.length; i++) {
         GetDiaryByDiaryIDSQL =
           "select * from diary " +
           "where diary_id = " +
-          Diary_id_array[i].diary_id;
+          results[i].diary_id;
         Diary_obj = sync_db.query(GetDiaryByDiaryIDSQL);
         //diary_cal_cat 파싱하여 약속된 데이터로 변환
         let diary_cal_cat_array = new Array(Diary_obj[0].diary_cal_cat.length);
@@ -403,7 +391,7 @@ const PostDiary = (req, res) => {
           //Create TechTag
           for (let i = 0; i < req.body.diary["techtag"].length; i++) {
             const CreateTechtagSQL =
-              "INSERT INTO techtag (techtag_cat1, techtag_cat2, techtag_cat3, techtag_name, diary_id) VALUES" +
+              "INSERT INTO techtag (techtag_cat1, techtag_cat2, techtag_cat3, techtag_name, diary_id, user_id) VALUES" +
               " ('" +
               req.body.diary["techtag"][i]["category1"] +
               "', '" +
@@ -414,7 +402,9 @@ const PostDiary = (req, res) => {
               req.body.diary["techtag"][i]["tech_title"] +
               "', " +
               diary_id +
-              ")";
+              ", '" +
+              user_id_by_session +
+              "')";
             db.query(CreateTechtagSQL, function (error, results, fields) {
               if (error) {
                 res.status(409);
