@@ -30,6 +30,9 @@ app.use('/diary', diary);
 app.use('/diarysimple', diarysimple);
 app.use('/techtag', techtag);
 
+//서버작동 확인용
+app.get('/', (req, res) => res.send('index'));
+
 app.listen(PORT, () => {
   console.log('My REST API running on port ' + PORT + '!');
 })
