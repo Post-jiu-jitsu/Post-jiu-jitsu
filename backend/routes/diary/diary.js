@@ -420,11 +420,24 @@ const PostDiary = (req, res) => {
   db.end;
 };
 
+const PutDiary = (req, res) => {
+  res.send("put");
+}
+
+const DeleteDiary = (req, res) => {
+  
+  res.send("delete");
+}
+
 router.get("/all", GetDiaryAll);
 router.get("/month", GetDiaryByMonth);
 router.get("/day", GetDiaryByDay);
 router.get("/techtag", GetDiaryBytechtag);
 
 router.post("/", PostDiary);
+
+router.put("/", PutDiary);
+
+router.delete("/", DeleteDiary);
 
 module.exports = router;
