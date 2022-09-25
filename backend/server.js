@@ -18,6 +18,12 @@ var sessionObj = require('./config/session')
 const PORT = 3000;
 //세션 설정값 객체
 
+//DB 꾸준히 요청하여 mysql 꺼지는 에러 해결
+const db = require("./database/dbconfig");
+setInterval(function () {
+  db.query('SELECT 1');
+}, 5000);
+
 app.use(session(sessionObj)); 
 app.use(passport.initialize());
 app.use(passport.session());
